@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaze.Coin", "Amaze.Coin\Amaze.Coin.csproj", "{A62F42DB-9793-4482-9544-71364376A03E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A62F42DB-9793-4482-9544-71364376A03E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A62F42DB-9793-4482-9544-71364376A03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A62F42DB-9793-4482-9544-71364376A03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A62F42DB-9793-4482-9544-71364376A03E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9561864-CCFF-4D4F-ABBB-05BB52FD9546}
+	EndGlobalSection
+EndGlobal
