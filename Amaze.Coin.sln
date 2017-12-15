@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaze.Coin", "Amaze.Coin\Amaze.Coin.csproj", "{A62F42DB-9793-4482-9544-71364376A03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amaze.Coin", "Amaze.Coin\Amaze.Coin.csproj", "{A62F42DB-9793-4482-9544-71364376A03E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaze.Coin.Tests", "Amaze.Coin.Tests\Amaze.Coin.Tests.csproj", "{D109EBD7-342C-4832-9443-705B3ED9461F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amaze.Coin.Tests", "Amaze.Coin.Tests\Amaze.Coin.Tests.csproj", "{D109EBD7-342C-4832-9443-705B3ED9461F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amaze.Coin.Api", "Amaze.Coin.Api\Amaze.Coin.Api.csproj", "{6802E9D3-496F-4366-9E95-D836FCD59103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amaze.Coin.Api", "Amaze.Coin.Api\Amaze.Coin.Api.csproj", "{6802E9D3-496F-4366-9E95-D836FCD59103}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

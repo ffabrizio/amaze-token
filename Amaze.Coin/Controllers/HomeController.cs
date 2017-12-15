@@ -8,21 +8,26 @@ namespace Amaze.Coin.Controllers
 {
     public class HomeController : Controller
     {
+        public AccountStore AccountStore { get; private set; }
+        public HomeController(AccountStore accountStore)
+        {
+            AccountStore = accountStore;
+        }
+
         public IActionResult Index()
         {
             var user = (WindowsIdentity)User.Identity;
-            var store = new AccountStore();
-            var account = store.GetAccount(user.Name);
+            var account = AccountStore.GetAccount(user.Name);
             var vm = new AppVm();
 
             if (account == null)
             {
-                account = store.AddAccount(UserAccount.Initialize(user.Name));
+                account = AccountStore.AddAccount(UserAccount.Initialize(user.Name));
                 vm.IsNewAccount = true;
             }
 
             vm.Wallet = account.Wallet;
-            vm.Balance = store.GetBalance(account.Wallet);
+            vm.Balance = AccountStore.GetBalance(account.Wallet);
 
             return View(vm);
         }
@@ -30,9 +35,8 @@ namespace Amaze.Coin.Controllers
         public IActionResult CheckBalance()
         {
             var user = (WindowsIdentity)User.Identity;
-            var store = new AccountStore();
-            var account = store.GetAccount(user.Name);
-            var balance = store.GetBalance(account.Wallet);
+            var account = AccountStore.GetAccount(user.Name);
+            var balance = AccountStore.GetBalance(account.Wallet);
 
             return new JsonResult(balance);
         }

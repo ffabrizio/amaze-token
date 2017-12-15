@@ -2,7 +2,7 @@
 
 @if (Model.IsNewAccount)
 {
-    @Html.Partial("WalletCreatedMessage", Model)
+    @Html.Partial("NewWalletNotification", Model)
 }
 
 <div>
@@ -17,10 +17,10 @@
     $(document).ready(function () {
         setInterval(function () {
             $.ajax({
-                url: "/home/checkbalance"
+                url: '/home/checkbalance/'
             }).done(function (result) {
-                console.log(result)
-                $("balanceOf").val(result);
+                console.log('Updating balance', result);
+                $('#balanceOf').text(result);
             })
          }, 30000)
     });

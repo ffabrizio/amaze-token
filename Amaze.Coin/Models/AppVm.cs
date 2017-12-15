@@ -1,4 +1,5 @@
 ﻿using Nethereum.HdWallet;
+using System.Numerics;
 
 namespace Amaze.Coin.Models
 {
@@ -6,6 +7,6 @@ namespace Amaze.Coin.Models
     {
         public bool IsNewAccount { get; set; }
         public Wallet Wallet { get; set; }
-        public int Balance { get; set; }
+        public BigInteger Balance { get; set; }
     }
 }

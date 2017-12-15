@@ -8,14 +8,21 @@
     }
   },
   "profiles": {
-    "IIS Express": {
+    "IIS Express [Dev]": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Amaze.Coin": {
+    "IIS Express [Ropsten]": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Ropsten"
+      }
+    },
+    "DotNet [Dev]": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
