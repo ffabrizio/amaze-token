@@ -10,7 +10,7 @@ namespace Amaze.Coin
 {
     public class Startup
     {
-        public static IConfigurationRoot Configuration { get; set; }
+        private static IConfigurationRoot Configuration { get; set; }
 
         public Startup(IHostingEnvironment env)
         {
@@ -29,6 +29,8 @@ namespace Amaze.Coin
             services.AddMvc();
 
             var appSettings = Configuration.GetSection("App").Get<AppSettings>();
+            appSettings.Abi = File.ReadAllText("./wwwroot/Tokens/ContractAbi.json");
+            
             var adminStore = new AdminStore(appSettings);
             var accountStore = new AccountStore(appSettings, adminStore);
 

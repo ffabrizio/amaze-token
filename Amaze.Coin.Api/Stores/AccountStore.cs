@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using Amaze.Coin.Stores.Accounts;
+using Amaze.Coin.Api.Accounts;
+using Amaze.Coin.Api.Contracts;
 using Nethereum.HdWallet;
 using Nethereum.Web3;
 
@@ -11,7 +12,7 @@ namespace Amaze.Coin.Api.Stores
     {
         private AppSettings AppSettings { get; set; }
         private AdminStore AdminStore { get; set; }
-        private static List<UserAccount> userAccounts = new List<UserAccount>();
+        private static readonly List<UserAccount> UserAccounts = new List<UserAccount>();
 
         public AccountStore(AppSettings settings, AdminStore adminStore)
         {
@@ -19,21 +20,27 @@ namespace Amaze.Coin.Api.Stores
             AdminStore = adminStore;
         }
 
-        public IEnumerable<UserAccount> GetAccounts()
+        private static IEnumerable<UserAccount> GetAccounts()
         {
-            return userAccounts;
+            return UserAccounts;
         }
 
-        public UserAccount GetAccount(string userName)
+        public static UserAccount GetAccount(string userName)
         {
-            return GetAccounts().FirstOrDefault(_ => _.UserName.ToLowerInvariant() == userName.ToLowerInvariant());
+            return GetAccounts().FirstOrDefault(_ => string.Equals(_.UserName, userName, StringComparison.InvariantCultureIgnoreCase));
         }
 
-        public BigInteger GetBalance(Wallet wallet)
+        public int GetBalance(Wallet wallet)
         {
-            var web3 = new Web3(wallet.GetAccount(0), AppSettings.RpcEndpoint);
-            var balance = web3.Eth.GetBalance.SendRequestAsync(wallet.GetAccount(0).Address).Result;
-            return balance.Value;
+            var web3 = new Web3(AppSettings.RpcEndpoint);
+            var contractAddress = AppSettings.CoinContractAddress;
+            var msg = new BalanceOfFunction
+            {
+                Owner = wallet.GetAccount(0).Address
+            };
+            
+            var handler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
+            return handler.QueryAsync<int>(msg, contractAddress).Result;;
         }
 
         public UserAccount AddAccount(UserAccount account)
@@ -44,7 +51,7 @@ namespace Amaze.Coin.Api.Stores
                 return existingAccount;
             }
 
-            userAccounts.Add(account);
+            UserAccounts.Add(account);
 
             var tx = AdminStore.CreditAddress(account.Wallet.GetAccount(0).Address, AppSettings.TokensOnAccountCreation);
             return GetAccount(account.UserName);

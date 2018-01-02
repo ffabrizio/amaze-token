@@ -1,12 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Ropsten;Mainnet</Configurations>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Nethereum.HdWallet" Version="2.2.0" />
   </ItemGroup>
-
 </Project>

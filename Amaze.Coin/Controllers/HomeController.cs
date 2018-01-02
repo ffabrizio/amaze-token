@@ -1,14 +1,15 @@
 ﻿using System.Security.Principal;
+using Amaze.Coin.Api.Accounts;
 using Amaze.Coin.Api.Stores;
 using Amaze.Coin.Models;
-using Amaze.Coin.Stores.Accounts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amaze.Coin.Controllers
 {
     public class HomeController : Controller
     {
-        public AccountStore AccountStore { get; private set; }
+        private AccountStore AccountStore { get; }
+        
         public HomeController(AccountStore accountStore)
         {
             AccountStore = accountStore;
@@ -16,7 +17,7 @@ namespace Amaze.Coin.Controllers
 
         public IActionResult Index()
         {
-            var user = (WindowsIdentity)User.Identity;
+            var user = new GenericIdentity("ffabrizio");
             var account = AccountStore.GetAccount(user.Name);
             var vm = new AppVm();
 
@@ -34,7 +35,7 @@ namespace Amaze.Coin.Controllers
 
         public IActionResult CheckBalance()
         {
-            var user = (WindowsIdentity)User.Identity;
+            var user = new GenericIdentity("ffabrizio");
             var account = AccountStore.GetAccount(user.Name);
             var balance = AccountStore.GetBalance(account.Wallet);
 
