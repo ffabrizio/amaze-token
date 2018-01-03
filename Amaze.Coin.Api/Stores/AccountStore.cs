@@ -42,7 +42,7 @@ namespace Amaze.Coin.Api.Stores
             };
             
             var handler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
-            return handler.QueryAsync<int>(msg, contractAddress).Result;;
+            return handler.QueryAsync<int>(msg, contractAddress).Result;
         }
 
         public UserAccount AddAccount(UserAccount account)

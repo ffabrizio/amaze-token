@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.IO;
 
 namespace Amaze.Coin
 {
@@ -29,7 +28,6 @@ namespace Amaze.Coin
             services.AddMvc();
 
             var appSettings = Configuration.GetSection("App").Get<AppSettings>();
-            appSettings.Abi = File.ReadAllText("./wwwroot/Tokens/ContractAbi.json");
             
             var adminStore = new AdminStore(appSettings);
             var accountStore = new AccountStore(appSettings, adminStore);

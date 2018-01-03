@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Net;
-
-namespace Amaze.Coin.Api
+﻿namespace Amaze.Coin.Api
 {
     public class AppSettings
     {
@@ -9,6 +6,5 @@ namespace Amaze.Coin.Api
         public string AdminKey { get; set; }
         public int TokensOnAccountCreation { get; set; }
         public string CoinContractAddress { get; set; }
-        public string Abi { get; set; }
     }
 }
