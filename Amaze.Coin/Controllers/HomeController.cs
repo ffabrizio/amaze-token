@@ -17,7 +17,7 @@ namespace Amaze.Coin.Controllers
 
         public IActionResult Index()
         {
-            var user = new GenericIdentity("ffabrizio");
+            var user = GetCurrentUser();
             var account = AccountStore.GetAccount(user.Name);
             var vm = new AppVm();
 
@@ -35,11 +35,17 @@ namespace Amaze.Coin.Controllers
 
         public IActionResult CheckBalance()
         {
-            var user = new GenericIdentity("ffabrizio");
+            var user = GetCurrentUser();
             var account = AccountStore.GetAccount(user.Name);
             var balance = AccountStore.GetBalance(account.Wallet);
 
             return new JsonResult(balance);
+        }
+
+        private IIdentity GetCurrentUser()
+        {
+            // POC - this is either an auth service or AD
+            return new GenericIdentity("ffabrizio");
         }
     }
 }

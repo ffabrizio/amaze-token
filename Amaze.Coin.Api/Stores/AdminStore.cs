@@ -17,8 +17,10 @@ namespace Amaze.Coin.Api.Stores
             _adminAccount = new Account(AppSettings.AdminKey);
         }
 
-        internal async Task<TransactionReceipt> CreditAddress(string address, int number)
+        internal async Task<TransactionReceipt> CreditAddress(string address, int tokens = 0)
         {
+            if (tokens <= 0) return null;
+            
             var adminAddress = _adminAccount.Address;
 
             var web3 = new Web3(_adminAccount, AppSettings.RpcEndpoint);
@@ -28,7 +30,7 @@ namespace Amaze.Coin.Api.Stores
             {
                 FromAddress = adminAddress,
                 To = address,
-                TokenAmount = AppSettings.TokensOnAccountCreation
+                TokenAmount = tokens
             };
             
             var handler = web3.Eth.GetContractTrasactionHandler<TransferFunction>();

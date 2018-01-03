@@ -12,6 +12,8 @@ namespace Amaze.Coin.Api.Stores
     {
         private AppSettings AppSettings { get; set; }
         private AdminStore AdminStore { get; set; }
+        
+        // Our in-memory user DB, to be replaced by a persisted medium...
         private static readonly List<UserAccount> UserAccounts = new List<UserAccount>();
 
         public AccountStore(AppSettings settings, AdminStore adminStore)
@@ -51,6 +53,7 @@ namespace Amaze.Coin.Api.Stores
                 return existingAccount;
             }
 
+            // Add to our in-memory DB
             UserAccounts.Add(account);
 
             var tx = AdminStore.CreditAddress(account.Wallet.GetAccount(0).Address, AppSettings.TokensOnAccountCreation);
