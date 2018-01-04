@@ -25,7 +25,7 @@ namespace Amaze.Coin
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            keyRing = new DirectoryInfo(Path.Combine(env.WebRootPath, "Keys"));
+            keyRing = new DirectoryInfo(Path.Combine(env.ContentRootPath, "Keys"));
         }
 
         public void ConfigureServices(IServiceCollection services)
