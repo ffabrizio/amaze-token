@@ -4,6 +4,7 @@ using Amaze.Coin.Api.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
+using System.IO;
 
 namespace Amaze.Coin.Tests
 {
@@ -15,6 +16,7 @@ namespace Amaze.Coin.Tests
             RpcEndpoint = "https://ropsten.infura.io",
             CoinContractAddress = "0x98B4ca39273c6378F803AD917FAdA45FD97Ce192",
         };
+
 
         [TestMethod]
         public void new_account_should_have_hdwallet_available()
@@ -30,6 +32,7 @@ namespace Amaze.Coin.Tests
         [TestMethod]
         public void admin_account_should_have_ether_available()
         {
+            //var keyRing = new DirectoryInfo(Path.Combine(env.WebRootPath, "Keys"));
             const string privateKey = "0xd7c66a2a58ed5100fa15507228f3225397c544c4f227a40117a2d900d11368f1";
             var account = new Account(privateKey);
             

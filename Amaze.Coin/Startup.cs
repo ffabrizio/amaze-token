@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace Amaze.Coin
 {
     public class Startup
     {
         private static IConfigurationRoot Configuration { get; set; }
+        private static DirectoryInfo keyRing;
 
         public Startup(IHostingEnvironment env)
         {
@@ -22,14 +24,20 @@ namespace Amaze.Coin
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            keyRing = new DirectoryInfo(Path.Combine(env.WebRootPath, "Keys"));
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(keyRing);
+
             services.AddMvc();
 
             var appSettings = Configuration.GetSection("App").Get<AppSettings>();
-            var cipherService = new CipherService(DataProtectionProvider.Create("amaze-coin"));
+
+            var cipherService = new CipherService(DataProtectionProvider.Create(keyRing));
             
             var adminStore = new AdminStore(appSettings, cipherService);
             var accountStore = new AccountStore(appSettings, adminStore);
