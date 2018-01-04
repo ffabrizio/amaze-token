@@ -1,6 +1,9 @@
 ﻿using Amaze.Coin.Api;
+using Amaze.Coin.Api.Interfaces;
+using Amaze.Coin.Api.Services;
 using Amaze.Coin.Api.Stores;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,21 +27,21 @@ namespace Amaze.Coin
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication();
             services.AddMvc();
 
             var appSettings = Configuration.GetSection("App").Get<AppSettings>();
+            var cipherService = new CipherService(DataProtectionProvider.Create("amaze-coin"));
             
-            var adminStore = new AdminStore(appSettings);
+            var adminStore = new AdminStore(appSettings, cipherService);
             var accountStore = new AccountStore(appSettings, adminStore);
 
-            services.AddSingleton(adminStore);
-            services.AddSingleton(accountStore);
+            services.AddSingleton<ICipherService>(cipherService);
+            services.AddSingleton<IAdminStore>(adminStore);
+            services.AddSingleton<IAccountStore>(accountStore);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
             if (env.IsDevelopment())

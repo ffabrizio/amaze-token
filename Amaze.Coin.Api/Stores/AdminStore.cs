@@ -1,25 +1,28 @@
-﻿using Nethereum.RPC.Eth.DTOs;
+﻿using System.Threading.Tasks;
 using Nethereum.Web3;
-using System.Threading.Tasks;
-using Amaze.Coin.Api.Contracts;
 using Nethereum.Web3.Accounts;
+using Nethereum.RPC.Eth.DTOs;
+using Amaze.Coin.Api.Contracts;
+using Amaze.Coin.Api.Interfaces;
 
 namespace Amaze.Coin.Api.Stores
 {
-    public class AdminStore
+    public class AdminStore : IAdminStore
     {
-        private AppSettings AppSettings { get; set; }
+        private AppSettings AppSettings { get; }
+
         private readonly Account _adminAccount;
 
-        public AdminStore(AppSettings settings)
+        public AdminStore(AppSettings settings, ICipherService cipherService)
         {
             AppSettings = settings;
-            _adminAccount = new Account(AppSettings.AdminKey);
+            _adminAccount = new Account(cipherService.Decrypt(AppSettings.AdminKey));
         }
 
-        internal async Task<TransactionReceipt> CreditAddress(string address, int tokens = 0)
+        public async Task<TransactionReceipt> GiveTokens(string address, int tokens)
         {
             if (tokens <= 0) return null;
+            if (_adminAccount == null) return null;
             
             var adminAddress = _adminAccount.Address;
 
@@ -34,7 +37,8 @@ namespace Amaze.Coin.Api.Stores
             };
             
             var handler = web3.Eth.GetContractTrasactionHandler<TransferFunction>();
-            return await handler.SendRequestAsync(msg, contractAddress);
+            var tx = await handler.SendRequestAsync(msg, contractAddress);
+            return new TransactionReceipt { TransactionHash = tx };
         }
     }
 }

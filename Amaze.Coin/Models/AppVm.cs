@@ -1,5 +1,5 @@
-﻿using Nethereum.HdWallet;
-using System.Numerics;
+﻿using System.Numerics;
+using Nethereum.HdWallet;
 
 namespace Amaze.Coin.Models
 {

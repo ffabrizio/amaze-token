@@ -6,7 +6,7 @@ namespace Amaze.Coin.Api.Contracts
     [Function("balanceOf", "uint256")]
     public class BalanceOfFunction : ContractMessage
     {
-        [Parameter("address", "_owner", 1)]
+        [Parameter("address", "_owner")]
         public string Owner { get; set; }
     }
 }

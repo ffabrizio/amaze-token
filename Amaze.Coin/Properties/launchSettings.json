@@ -26,7 +26,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Ropsten"
       },
       "applicationUrl": "http://localhost:60374/"
     }

@@ -1,16 +1,16 @@
-﻿using System.Security.Principal;
-using Amaze.Coin.Api.Accounts;
-using Amaze.Coin.Api.Stores;
-using Amaze.Coin.Models;
+﻿using System;
+using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
+using Amaze.Coin.Api.Interfaces;
+using Amaze.Coin.Models;
 
 namespace Amaze.Coin.Controllers
 {
     public class HomeController : Controller
     {
-        private AccountStore AccountStore { get; }
+        private IAccountStore AccountStore { get; }
         
-        public HomeController(AccountStore accountStore)
+        public HomeController(IAccountStore accountStore)
         {
             AccountStore = accountStore;
         }
@@ -23,12 +23,12 @@ namespace Amaze.Coin.Controllers
 
             if (account == null)
             {
-                account = AccountStore.AddAccount(UserAccount.Initialize(user.Name));
+                account = AccountStore.AddAccount(user.Name);
                 vm.IsNewAccount = true;
             }
 
             vm.Wallet = account.Wallet;
-            vm.Balance = AccountStore.GetBalance(account.Wallet);
+            vm.Balance = AccountStore.GetBalance(account.Wallet.GetAccount(0).Address);
 
             return View(vm);
         }
@@ -37,7 +37,7 @@ namespace Amaze.Coin.Controllers
         {
             var user = GetCurrentUser();
             var account = AccountStore.GetAccount(user.Name);
-            var balance = AccountStore.GetBalance(account.Wallet);
+            var balance = AccountStore.GetBalance(account.Wallet.GetAccount(0).Address);
 
             return new JsonResult(balance);
         }
@@ -45,7 +45,16 @@ namespace Amaze.Coin.Controllers
         private IIdentity GetCurrentUser()
         {
             // POC - this is either an auth service or AD
-            return new GenericIdentity("ffabrizio");
+            var cookieId = ControllerContext.HttpContext.Request.Cookies["AMZ_WALLET_ID"];
+            if (!string.IsNullOrWhiteSpace(cookieId))
+            {
+                return new GenericIdentity(cookieId);
+            }
+
+            cookieId = Guid.NewGuid().ToString(); 
+            ControllerContext.HttpContext.Response.Cookies.Append("AMZ_WALLET_ID", cookieId);
+            
+            return new GenericIdentity(cookieId);
         }
     }
 }
