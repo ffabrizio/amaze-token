@@ -8,13 +8,6 @@
     }
   },
   "profiles": {
-    "IIS Express [Dev]": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "IIS Express [Ropsten]": {
       "commandName": "IISExpress",
       "launchBrowser": true,
@@ -22,13 +15,20 @@
         "ASPNETCORE_ENVIRONMENT": "Ropsten"
       }
     },
-    "DotNet [Dev]": {
+    "IIS Express [MainNet]": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "MainNet"
+      }
+    },
+    "DotNet [Ropsten]": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Ropsten"
       },
-      "applicationUrl": "http://localhost:60374/"
+      "applicationUrl": "http://localhost:5001/"
     }
   }
 }
