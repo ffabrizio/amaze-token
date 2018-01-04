@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
-using Amaze.Coin.Api.Interfaces;
+using Amaze.Coin.Api.Stores;
 using Amaze.Coin.Models;
 
 namespace Amaze.Coin.Controllers

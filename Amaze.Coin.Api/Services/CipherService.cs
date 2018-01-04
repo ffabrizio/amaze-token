@@ -1,5 +1,4 @@
-﻿using Amaze.Coin.Api.Interfaces;
-using Microsoft.AspNetCore.DataProtection;
+﻿using Microsoft.AspNetCore.DataProtection;
 
 namespace Amaze.Coin.Api.Services
 {

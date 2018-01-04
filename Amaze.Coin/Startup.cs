@@ -1,5 +1,4 @@
 ﻿using Amaze.Coin.Api;
-using Amaze.Coin.Api.Interfaces;
 using Amaze.Coin.Api.Services;
 using Amaze.Coin.Api.Stores;
 using Microsoft.AspNetCore.Builder;

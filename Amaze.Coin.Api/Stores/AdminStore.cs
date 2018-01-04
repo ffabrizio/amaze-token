@@ -3,7 +3,7 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using Nethereum.RPC.Eth.DTOs;
 using Amaze.Coin.Api.Contracts;
-using Amaze.Coin.Api.Interfaces;
+using Amaze.Coin.Api.Services;
 
 namespace Amaze.Coin.Api.Stores
 {

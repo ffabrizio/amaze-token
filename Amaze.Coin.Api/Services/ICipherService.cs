@@ -1,4 +1,4 @@
-﻿namespace Amaze.Coin.Api.Interfaces
+﻿namespace Amaze.Coin.Api.Services
 {
     public interface ICipherService
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Amaze.Coin.Api.Contracts;
-using Amaze.Coin.Api.Interfaces;
 using Amaze.Coin.Api.Models;
 using Nethereum.Web3;
 
