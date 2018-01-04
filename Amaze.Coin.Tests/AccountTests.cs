@@ -68,7 +68,7 @@ namespace Amaze.Coin.Tests
             {
                 FromAddress = account.Address,
                 To = "0x5ef8BA454A4295288e82dE67AB7f4559539664C3",
-                TokenAmount = 5*1000
+                TokenAmount = 5
             };
             
             var contractAddress = _settings.CoinContractAddress;
